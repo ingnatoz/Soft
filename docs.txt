@@ -1,0 +1,24 @@
+By: Mike
+Para generar los requerimeintos-----    pip3 freeze > requirements.txt
+Para instalar requerimientos-------     pip install -r requirements.txt
+Creamos el proyecto Django----------    django-admin startproject tec_dj .
+Start la app dentro del proyecto----    django-admin startapp purchase
+
+:::::::: EJECURTAR MIGRACIONES DEL PROYECTO :::::::
+Ejecutar----------------------------    python manage.py migrate
+Ejecutar----------------------------    python manage.py makemigrations
+Para resetear-----------------------    python manage.py migrate admin zero
+
+>>>> CREAR USAURIO EN DJANGO <<<<<
+Crear Super Usuario-----------------    python manage.py createsuperuser
+user: mike
+mail: miguel@tecnocent.com
+pss: Tecno12345@
+
+
+:::::: EJECUTAR DOCKER :::::::::::::
+ Ejecucion sin cache, run arquitectura---   docker-compose build --no-cache && docker-compose up -d
+Acceder al contenedor--------------------   docker-compose exec back bash
+Ver los del Server-----------------------   docker logs back  -f
+Ver los del Server con hora--------------   docker logs back  -f -t
+
