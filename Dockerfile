@@ -1,6 +1,8 @@
 # By: Mike
-# https://hub.docker.com/_/python/
-FROM python:3.9 
+
+FROM python:3.9
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends
 # Evita que Python escriba archivos pyc en el disco (equivalente a la python -B opción )
 ENV PYTHONDONTWRITEBYTECODE 1
 # Evita que Python almacene en búfer stdout y stderr (equivalente a la python -u opción )

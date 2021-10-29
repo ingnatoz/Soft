@@ -2,12 +2,12 @@
 
 # Parrot Soft
 
-## Stack de Tecnologías Desarrollo
+## Stack de Tecnologías de Desarrollo
 
-- python >= 3.9 https://www.python.org/downloads
+- python >= 3.9 https://www.python.org/downloads, https://hub.docker.com/_/python/
 - Django == 3.2.8    https://www.djangoproject.com
 - Django Rest Framework == 3.12.4   https://www.django-rest-framework.org
-- MySQL 5.7
+- MySQL 5.7   https://registry.hub.docker.com/_/mysql
 
 
 # 
@@ -19,8 +19,20 @@
 - 2.- Instalar https://docs.microsoft.com/en-us/windows/wsl/install-win10
 - 3.- Ejecutar en Consola: https://docs.microsoft.com/en-us/virtualization/hyper-v-on-windows/quick-start/enable-hyper-v
 - En la aplicacion de Docker configurar el Resource ->Advance (subir recursos)  ->File Sharing  (poner la raiz de donde se encuentre el proyecto C:\ )
-## Ejecución localhost
-- Posicionarse en directorio: tec-py\tec_dj
-- Ejecutar: docker-compose up -d
-- Ejecutar Requerimientos (linea 27): https://github.com/tecnocent/TecnocentPy/blob/main/tec-py/biblia-django.txt
+
+## Ejecución Arquitectura local
+- Posicionarse en directorio raiz: -$ cd parrot
+- Ejecucion Arquitectura local: -$ docker-compose build --no-cache && docker-compose up -d && docker-compose restart -t 15 back
+- Acceder al contenedor Backend: -$ docker-compose exec back bash
+- Ver los logs del  Server: -$ docker logs back  -f
+- Ver los logs del Server con hora: -$ docker logs back  -f -t
+
+### CREAR USAURIO
+- -$ python manage.py createsuperuser
+- user: miguel
+- mail: miguel@parrot.com
+- pss: miguel12345@
+
+### Test
+- http://localhost/admin
 

@@ -7,7 +7,7 @@ services:
     container_name: back
     restart: unless-stopped
     ports:
-      - "8200:8000"
+      - "80:8000"
     volumes:
       - .:/app
     depends_on:
