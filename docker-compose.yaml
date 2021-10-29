@@ -1,0 +1,29 @@
+version: '3.8'
+services:
+  back:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: back
+    restart: unless-stopped
+    ports:
+      - "8200:8000"
+    volumes:
+      - .:/app
+    depends_on:
+      - parrotDB
+
+  parrotDB:
+    image: mysql:5.7.22
+    container_name: parrotDB
+    restart: unless-stopped
+    environment:
+      MYSQL_DATABASE: parrot_db
+      MYSQL_USER: root
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_PASSWORD: root
+    volumes:
+      - .dbdata:/var/lib/mysql
+    ports:
+      - 33068:3306
+
