@@ -20,18 +20,12 @@
 - 3.- Ejecutar en Consola: https://docs.microsoft.com/en-us/virtualization/hyper-v-on-windows/quick-start/enable-hyper-v
 - En la aplicacion de Docker configurar el Resource ->Advance (subir recursos)  ->File Sharing  (poner la raiz de donde se encuentre el proyecto C:\ )
 
-## Ejecución Arquitectura local
+## Ejecución de Arquitectura local
 - Posicionarse en directorio raiz: -$ cd parrot
 - Ejecucion Arquitectura local: -$ docker-compose build --no-cache && docker-compose up -d && docker-compose restart -t 15 back
 - Acceder al contenedor Backend: -$ docker-compose exec back bash
 - Ver los logs del  Server: -$ docker logs back  -f
 - Ver los logs del Server con hora: -$ docker logs back  -f -t
-
-### CREAR USAURIO
-- -$ python manage.py createsuperuser
-- user: miguel
-- mail: miguel@parrot.com
-- pss: miguel12345@
 
 ### Test
 - http://localhost/admin
