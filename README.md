@@ -26,6 +26,9 @@
 - Ver los logs del  Server: -$ docker logs back  -f
 - Ver los logs del Server con hora: -$ docker logs back  -f -t
 
-### Test
+> CREAR USAURIO EN DJANGO 
+- Ejecutar: -$ python manage.py createsuperuser
+
+> Test
 - http://localhost/admin
 
