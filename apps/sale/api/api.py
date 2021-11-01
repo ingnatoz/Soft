@@ -1,14 +1,21 @@
-# Python
-# Django
-# Third
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.decorators import api_view
+
+from rest_framework import viewsets
 # Class && Functions
-from apps.purchase.models import PurchaseProduct
 from apps.sale.models import *
 from .serializers import *
+
+
+class PaymentTypeViewSets(viewsets.GenericViewSet):
+    model = PaymentType
+    serializer_class = PaymentTypeSerializer
+    queryset = None
+
+    def get_object(self, pk):
+        return get_object_or_404(self.model, pk=pk)
 
 
 @api_view(['GET', 'POST'])
@@ -16,7 +23,7 @@ def payment_type_api_view(request):
     if request.method == 'GET':
         payment_types = SalePaymentType.objects.all()
         if len(payment_types) > 0:
-            payment_types_serializer = SalePaymentTypeSerializer(payment_types, many=True)
+            payment_types_serializer = PaymentTypeSerializer(payment_types, many=True)
             content = {'message': 'success', 'payment_types': payment_types_serializer.data},
             return Response(content, status=status.HTTP_200_OK)
         else:
@@ -24,7 +31,7 @@ def payment_type_api_view(request):
             return Response(content, status=status.HTTP_404_NOT_FOUND)
 
     elif request.method == 'POST':
-        payment_type_serializer = SalePaymentTypeSerializer(data=request.data)
+        payment_type_serializer = PaymentTypeSerializer(data=request.data)
         if payment_type_serializer.is_valid():
             payment_type_serializer.save()
             content = {'message': "success", 'payment_type': payment_type_serializer.data}
@@ -35,15 +42,15 @@ def payment_type_api_view(request):
 
 @api_view(['GET', 'PUT', 'DELETE'])
 def payment_type_by_id_api_view(request, pk=None):
-    payment_type_list = list(SalePaymentType.objects.filter(id=pk).values())
+    payment_type_list = list(PaymentType.objects.filter(id=pk).values())
     if len(payment_type_list) > 0:
         payment_type = SalePaymentType.objects.filter(id=pk).first()
         if request.method == 'GET':
-            payment_type_serializer = SalePaymentTypeSerializer(payment_type)
+            payment_type_serializer = PaymentTypeSerializer(payment_type)
             content = {'message': "success", 'payment_type': payment_type_serializer.data}
             return Response(content, status=status.HTTP_200_OK)
         elif request.method == 'PUT':
-            payment_type_serializer = SalePaymentTypeSerializer(payment_type, data=request.data)
+            payment_type_serializer = PaymentTypeSerializer(payment_type, data=request.data)
             if payment_type_serializer.is_valid():
                 payment_type_serializer.save()
                 content = {'message': "success", 'payment_type': payment_type_serializer.data}
@@ -71,9 +78,9 @@ def payment_type_by_id_api_view(request, pk=None):
 @api_view(['GET', 'POST'])
 def customer_api_view(request):
     if request.method == 'GET':
-        customers = SaleCustomer.objects.all()
+        customers = Customer.objects.all()
         if len(customers) > 0:
-            customers_serializer = SaleCustomerSerializer(customers, many=True)
+            customers_serializer = CustomerSerializer(customers, many=True)
             content = {'message': 'success', 'customers': customers_serializer.data},
             return Response(content, status=status.HTTP_200_OK)
         else:
@@ -92,15 +99,15 @@ def customer_api_view(request):
 
 @api_view(['GET', 'PUT', 'DELETE'])
 def customer_by_id_api_view(request, pk=None):
-    customer_list = list(SaleCustomer.objects.filter(id=pk).values())
+    customer_list = list(Customer.objects.filter(id=pk).values())
     if len(customer_list) > 0:
-        customer = SaleCustomer.objects.filter(id=pk).first()
+        customer = Customer.objects.filter(id=pk).first()
         if request.method == 'GET':
-            customer_serializer = SaleCustomerSerializer(customer)
+            customer_serializer = CustomerSerializer(customer)
             content = {'message': "success", 'customer': customer_serializer.data}
             return Response(content, status=status.HTTP_200_OK)
         elif request.method == 'PUT':
-            customer_serializer = SaleCustomerSerializer(customer, data=request.data)
+            customer_serializer = CustomerSerializer(customer, data=request.data)
             if customer_serializer.is_valid():
                 customer_serializer.save()
                 content = {'message': "success", 'customer': customer_serializer.data}
@@ -126,15 +133,15 @@ def customer_by_id_api_view(request, pk=None):
 
 
 @api_view(['GET', 'POST'])
-def sale_channel_api_view(request):
+def restaurant_api_view(request):
     if request.method == 'GET':
-        sale_channels = SaleChannel.objects.all()
-        if len(sale_channels) > 0:
-            sale_channels_serializer = SaleChannelSerializer(sale_channels, many=True)
-            content = {'message': 'success', 'sale_channels': sale_channels_serializer.data},
+        restaurants = SaleChannel.objects.all()
+        if len(restaurants) > 0:
+            restaurants_serializer = RestaurantSerializer(sale_channels, many=True)
+            content = {'message': 'success', 'restaurants': restaurants_serializer.data},
             return Response(content, status=status.HTTP_200_OK)
         else:
-            content = {'message': 'errors', 'sale_channels': 'sale channels not fund...'}
+            content = {'message': 'errors', 'restaurants': 'restaurants not fund...'}
             return Response(content, status=status.HTTP_404_NOT_FOUND)
 
     elif request.method == 'POST':

@@ -35,20 +35,31 @@ class Restaurant(admin.ModelAdmin):
     list_per_page = 100
 
 
+@admin.register(Customer)
+class Customer(admin.ModelAdmin):
+    list_display = ('id', 'name', 'email', 'address', 'rfc', 'phone', 'status',)
+    ordering = ('id',)
+    search_fields = ('id', 'name', 'email', 'address', 'rfc', 'phone', 'status',)
+    list_editable = ('name', 'email', 'address', 'rfc', 'phone', 'status',)
+    list_display_links = ('id',)
+    list_filter = ('name', 'email', 'status',)
+    list_per_page = 100
+
+
 @admin.register(SaleOrder)
 class SaleOrder(admin.ModelAdmin):
     list_display = (
-        'id', 'marketplace_id', 'total', 'confirm', 'status_order', 'is_fee_retrieve', 'commission', 'user',
+        'id', 'marketplace_id', 'total', 'confirm', 'status_order', 'is_fee_retrieve', 'commission', 'customer', 'user',
         'payment_type', 'restaurant')
     ordering = ('id',)
     search_fields = (
-        'id', 'marketplace_id', 'total', 'confirm', 'status_order', 'is_fee_retrieve', 'commission', 'user',
+        'id', 'marketplace_id', 'total', 'confirm', 'status_order', 'is_fee_retrieve', 'commission', 'customer', 'user',
         'payment_type', 'restaurant')
     list_editable = (
         'marketplace_id', 'total', 'confirm', 'status_order', 'is_fee_retrieve', 'commission', 'user', 'payment_type',
         'restaurant')
     list_display_links = ('id',)
-    list_filter = ('confirm', 'status_order', 'is_fee_retrieve', 'user', 'payment_type', 'restaurant')
+    list_filter = ('confirm', 'status_order', 'is_fee_retrieve', 'customer', 'user', 'payment_type', 'restaurant')
     raw_id_fields = ('payment_type', 'restaurant',)
     list_per_page = 100
 

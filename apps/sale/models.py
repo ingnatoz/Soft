@@ -77,6 +77,31 @@ class Restaurant(models.Model):
         ordering = ['id']
 
 
+class Customer(models.Model):
+    id = models.AutoField(primary_key=True)
+    name = models.CharField('Nombre', max_length=50, null=False, unique=True, )
+    email = models.EmailField('Correo Electrónico', max_length=255, unique=True, null=False, )
+    address = models.CharField('Dirección', max_length=250, null=True, blank=True, )
+    rfc = models.CharField('RFC', max_length=10, null=True, unique=True)
+    phone = models.PositiveBigIntegerField('Teléfono', validators=[MaxValueValidator(9999999999)], null=True,
+                                           blank=True, unique=True)
+    status = models.BooleanField('Estado', null=False, default=True, )
+    created_at = models.DateTimeField('Creado el', auto_now_add=True, null=True, editable=False, )
+    updated_at = models.DateTimeField('Actualizado el', auto_now=True, null=True, editable=False, )
+
+    def customer_format(self):
+        return "{} / {}".format(self.name, self.email)
+
+    def __str__(self):
+        return self.customer_format()
+
+    class Meta:
+        verbose_name = 'Cliente'
+        verbose_name_plural = 'Clientes'
+        db_table = 'customer'
+        ordering = ['id']
+
+
 class SaleOrder(models.Model):
     id = models.AutoField(primary_key=True)
     marketplace_id = models.CharField('Marketplace ID', max_length=50, null=False, unique=True)
@@ -86,6 +111,8 @@ class SaleOrder(models.Model):
     is_fee_retrieve = models.BooleanField('Es deducible', null=False, default=False)
     commission = models.DecimalField('Comisión de la Orden', null=False, default=0, validators=numeric_option_b,
                                      max_digits=10, decimal_places=2, )
+    customer = models.ForeignKey(Customer, null=False, related_name='customer_order', on_delete=models.RESTRICT,
+                             verbose_name='Cliente')
     user = models.ForeignKey(User, null=False, related_name='user_order', on_delete=models.RESTRICT,
                              verbose_name='Usuario')
     restaurant = models.ForeignKey(Restaurant, null=False, related_name='channel_order', on_delete=models.RESTRICT,

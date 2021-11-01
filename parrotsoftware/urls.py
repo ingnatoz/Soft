@@ -6,7 +6,6 @@ from rest_framework_simplejwt.views import (
 )
 from apps.users.views import Login, Logout
 
-
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/login', Login.as_view(), name='token_login'),
@@ -14,4 +13,5 @@ urlpatterns = [
     path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
     path('api/user/', include('apps.users.api.urls')),
+    path('api/sale/', include('apps.sale.api.routers')),
 ]
