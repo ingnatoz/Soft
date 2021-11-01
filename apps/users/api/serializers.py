@@ -33,7 +33,6 @@ class CustomUserSerializer(serializers.ModelSerializer):
 
 
 class UserSerializer(serializers.ModelSerializer):
-    #  Convierte una estancia en una estructura de JSON
     groups = GetGroupSerializer(many=True, read_only=True)
     user_permissions = GetPermissionsSerializer(many=True, read_only=True)
 
