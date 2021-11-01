@@ -38,17 +38,17 @@ class Restaurant(admin.ModelAdmin):
 @admin.register(SaleOrder)
 class SaleOrder(admin.ModelAdmin):
     list_display = (
-        'id', 'marketplace_id', 'total', 'confirm', 'status_order', 'is_fee_retrieve', 'commission', 'payment_type',
-        'restaurant')
+        'id', 'marketplace_id', 'total', 'confirm', 'status_order', 'is_fee_retrieve', 'commission', 'user',
+        'payment_type', 'restaurant')
     ordering = ('id',)
     search_fields = (
-        'id', 'marketplace_id', 'total', 'confirm', 'status_order', 'is_fee_retrieve', 'commission', 'payment_type',
-        'restaurant')
+        'id', 'marketplace_id', 'total', 'confirm', 'status_order', 'is_fee_retrieve', 'commission', 'user',
+        'payment_type', 'restaurant')
     list_editable = (
-        'marketplace_id', 'total', 'confirm', 'status_order', 'is_fee_retrieve', 'commission', 'payment_type',
+        'marketplace_id', 'total', 'confirm', 'status_order', 'is_fee_retrieve', 'commission', 'user', 'payment_type',
         'restaurant')
     list_display_links = ('id',)
-    list_filter = ('confirm', 'status_order', 'is_fee_retrieve', 'payment_type', 'restaurant')
+    list_filter = ('confirm', 'status_order', 'is_fee_retrieve', 'user', 'payment_type', 'restaurant')
     raw_id_fields = ('payment_type', 'restaurant',)
     list_per_page = 100
 

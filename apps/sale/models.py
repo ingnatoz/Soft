@@ -1,6 +1,7 @@
 from django.db import models
 from django.core.validators import *
 from .choices import *
+from apps.users.models import User
 
 numeric_option_a = [MinValueValidator(1), MaxValueValidator(9999999999)]
 numeric_option_b = [MinValueValidator(0), MaxValueValidator(9999999999)]
@@ -85,15 +86,15 @@ class SaleOrder(models.Model):
     is_fee_retrieve = models.BooleanField('Es deducible', null=False, default=False)
     commission = models.DecimalField('Comisión de la Orden', null=False, default=0, validators=numeric_option_b,
                                      max_digits=10, decimal_places=2, )
+    user = models.ForeignKey(User, null=False, related_name='user_order', on_delete=models.RESTRICT,
+                             verbose_name='Usuario')
+    restaurant = models.ForeignKey(Restaurant, null=False, related_name='channel_order', on_delete=models.RESTRICT,
+                                   verbose_name='Restaurante    ')
     payment_type = models.ForeignKey(PaymentType, null=False, related_name='payment_type_order',
                                      on_delete=models.RESTRICT, verbose_name='Tipo de pago')
-    # customer = models.ForeignKey(SaleCustomer, null=False, related_name='customer_order',
-    # on_delete=models.RESTRICT, verbose_name='Cliente')
-    restaurant = models.ForeignKey(Restaurant, null=False, related_name='channel_order', on_delete=models.RESTRICT,
-                                   verbose_name='Canal de Venta')
     created_at = models.DateTimeField('Creado el', auto_now_add=True, null=True, editable=False)
     updated_at = models.DateTimeField('Actualizado el', auto_now=True, null=True, editable=False)
-    delete_at = models.DateTimeField('Eliminado el', null=True, blank=True)
+    delete_at = models.DateTimeField('Eliminado el', null=True, blank=True, default=False)
 
     def sale_order_format(self):
         return "{} / {}".format(self.id, self.marketplace_id)
@@ -110,6 +111,7 @@ class SaleOrder(models.Model):
 
 class SaleOrderProduct(models.Model):
     id = models.AutoField(primary_key=True)
+    marketplace_item_id = models.CharField('Marketplace Item ID', max_length=50, null=True, blank=True, )
     name = models.CharField('Nombre', max_length=250, null=False, )
     sku = models.CharField('SKU', max_length=15, null=True, blank=True, )
     ean = models.CharField('EAN', max_length=15, null=True, blank=True, )
@@ -133,7 +135,6 @@ class SaleOrderProduct(models.Model):
                                 on_delete=models.RESTRICT, verbose_name='Producto de la Venta')
     sale_order = models.ForeignKey(SaleOrder, null=False, related_name='sale_order_products', on_delete=models.CASCADE,
                                    verbose_name='Orden de Venta')
-    marketplace_item_id = models.CharField('Marketplace Item ID', max_length=50, null=True, blank=True, )
     created_at = models.DateTimeField('Creado el', auto_now_add=True, null=True, editable=False)
     updated_at = models.DateTimeField('Actualizado el', auto_now=True, null=True, editable=False)
 
