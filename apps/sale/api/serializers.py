@@ -1,5 +1,11 @@
 from rest_framework import serializers
-from apps.sale.models import *
+from apps.sale.models import Product, PaymentType, Restaurant, Customer, SaleOrder, SaleOrderProduct
+
+
+class ProductSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Product
+        fields = '__all__'
 
 
 class PaymentTypeSerializer(serializers.ModelSerializer):

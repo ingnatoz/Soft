@@ -21,14 +21,7 @@
 - En la aplicacion de Docker configurar el Resource ->Advance (subir recursos)  ->File Sharing  (poner la raiz de donde se encuentre el proyecto C:\ )
 
 ## Ejecución de Arquitectura local
-- Ejecucion Arquitectura local: -$ docker-compose build --no-cache && docker-compose up -d && docker-compose restart -t 15 back
+- Ejecucion Arquitectura local: -$ docker-compose build --no-cache && docker-compose up -d && docker-compose restart -t 10 back && docker-compose exec back python manage.py makemigrations && docker-compose exec back python manage.py migrate && docker-compose restart back && docker-compose exec back python manage.py createsuperuser
 - Acceder al contenedor Backend: -$ docker-compose exec back bash
 - Ver los logs del  Server: -$ docker logs back  -f
 - Ver los logs del Server con hora: -$ docker logs back  -f -t
-
-> CREAR USAURIO EN DJANGO 
-- Ejecutar: -$ python manage.py createsuperuser
-
-> Test
-- http://localhost/admin
-

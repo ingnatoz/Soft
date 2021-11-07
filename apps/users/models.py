@@ -26,9 +26,9 @@ class UserManager(BaseUserManager):
 
 class User(AbstractBaseUser, PermissionsMixin):
     username = models.CharField(max_length=255, unique=True,)
-    email = models.EmailField('Correo Electrónico', max_length=255, unique=True, )
-    name = models.CharField('Nombres', max_length=255, blank=True, null=True,)
-    last_name = models.CharField('Apellidos', max_length=255, blank=True, null=True,)
+    email = models.EmailField('Email', max_length=255, unique=True, )
+    name = models.CharField('Name', max_length=255, blank=True, null=True,)
+    last_name = models.CharField('Last Name', max_length=255, blank=True, null=True,)
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
     objects = UserManager()
@@ -36,11 +36,11 @@ class User(AbstractBaseUser, PermissionsMixin):
     updated_at = models.DateTimeField(auto_now=True, null=True, editable=False)
 
     class Meta:
-        verbose_name = 'Usuario'
-        verbose_name_plural = 'Usuarios'
+        verbose_name = 'User'
+        verbose_name_plural = 'Users'
 
     USERNAME_FIELD = 'username'
     REQUIRED_FIELDS = ['email', 'name', 'last_name']
 
     def __str__(self):
-        return f'{self.name} {self.last_name}'
+        return f'{self.name} {self.email}'

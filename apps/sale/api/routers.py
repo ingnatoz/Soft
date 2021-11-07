@@ -1,6 +1,9 @@
 from rest_framework.routers import DefaultRouter
-from apps.sale.api.api import PaymentTypeViewSets
+
+from apps.sale.api.api import *
 
 router = DefaultRouter()
-router.register('payment_type', PaymentTypeViewSets, basename='payment_type', )
+
+router.register('product', ProductViewSets, basename="product")
+
 urlpatterns = router.urls
