@@ -32,3 +32,6 @@
 - http://localhost/admin
 - http://localhost/swagger
 - http://localhost/redoc
+
+## Modelado BD
+- https://github.com/ingnatoz/parrot/blob/main/parrort%20modelado.png
