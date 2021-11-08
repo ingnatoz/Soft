@@ -13,11 +13,11 @@ from apps.users.views import Login, Logout
 
 schema_view = get_schema_view(
     openapi.Info(
-        title="Snippets API",
-        default_version='v1',
-        description="Test description",
-        terms_of_service="https://www.google.com/policies/terms/",
-        contact=openapi.Contact(email="contact@snippets.local"),
+        title="Parrot API",
+        default_version='v0.1',
+        description="Parrot API documentation",
+        terms_of_service="https://miguelvazquez.dev/",
+        contact=openapi.Contact(email="ing.miguel.natanael@gmail.com"),
         license=openapi.License(name="BSD License"),
     ),
     public=True,
@@ -35,4 +35,5 @@ urlpatterns = [
     path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
     path('api/user/', include('apps.users.api.urls')),
     path('api/sale/', include('apps.sale.api.routers')),
+    path('api/report/', include('apps.report.api.urls')),
 ]
