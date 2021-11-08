@@ -130,8 +130,8 @@ class SaleOrder(models.Model):
         return self.sale_order_format()
 
     class Meta:
-        verbose_name = 'Sale order'
-        verbose_name_plural = 'Sale orders'
+        verbose_name = 'Sale Order'
+        verbose_name_plural = 'Sale Orders'
         db_table = 'sale_order'
         ordering = ['id']
 
