@@ -12,15 +12,16 @@ start_param = openapi.Parameter('start', in_=openapi.IN_QUERY, description='Data
 end_param = openapi.Parameter('end', in_=openapi.IN_QUERY, description='DataTime', type=openapi.TYPE_STRING)
 
 
-@swagger_auto_schema(method='post', manual_parameters=[start_param, end_param], responses={200: 'test'})
+@swagger_auto_schema(method='post', manual_parameters=[start_param, end_param], responses={
+    200: '{ "message": "success", "sale_order_product": [ {"name": "Daydoku","quantity": 120,"price": 12.0,"total": 100.0,"product": 1,"dcount": 12}]}'})
 @api_view(['POST'])
 def product_report_api_view(request):
     if request.method == 'POST':
         # try:
         start = (request.data['start'])
         end = request.data['end']
-        sale_order_product = SaleOrderProduct.objects.filter(created_at__range=(start, end))\
-            .values('name', 'quantity', 'price', 'total', 'product',)\
+        sale_order_product = SaleOrderProduct.objects.filter(created_at__range=(start, end)) \
+            .values('name', 'quantity', 'price', 'total', 'product', ) \
             .annotate(dcount=Count('product')).order_by()
         # .annotate(dcount=Count('product'), quantity_sum=Sum('quantity'), total_sum=Sum('total')).order_by()
     if len(sale_order_product) > 0:
