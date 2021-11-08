@@ -29,6 +29,8 @@
 - docker-compose exec back pytest
 
 ## Administración de Django &&  Documentación && Redoc
+- Todas la peticiones necesitan un token (JWT)
+- Para obtener el Token: http://localhost/redoc/#operation/login_create
 - http://localhost/admin
 - http://localhost/swagger
 - http://localhost/redoc
