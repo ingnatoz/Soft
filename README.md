@@ -25,6 +25,9 @@
 - Acceder al contenedor Backend: -$ docker-compose exec back bash
 - Ver los logs del Server con hora: -$ docker logs back  -f -t
 
+## Pruebas Pytest
+- docker-compose exec back pytest
+
 ## Administración de Django &&  Documentación && Redoc
 - http://localhost/admin
 - http://localhost/swagger
