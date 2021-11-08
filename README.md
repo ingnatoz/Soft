@@ -23,5 +23,9 @@
 ## Ejecución de Arquitectura local
 - Ejecucion Arquitectura local: -$ docker-compose build --no-cache && docker-compose up -d && docker-compose restart -t 10 back && docker-compose exec back python manage.py makemigrations && docker-compose exec back python manage.py migrate && docker-compose restart back && docker-compose exec back python manage.py createsuperuser
 - Acceder al contenedor Backend: -$ docker-compose exec back bash
-- Ver los logs del  Server: -$ docker logs back  -f
 - Ver los logs del Server con hora: -$ docker logs back  -f -t
+
+## Administración de Django &&  Documentación && Redoc
+- http://localhost/admin
+- http://localhost/swagger
+- http://localhost/redoc

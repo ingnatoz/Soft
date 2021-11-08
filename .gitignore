@@ -15,13 +15,13 @@ db.sqlite3-journal
 media
 
 
-# Parrot
+# Parrot Proyect
+apps/report/migrations/*
+!apps/report/migrations/__init__.py
 
-apps/sale/__pycache__/
 apps/sale/migrations/*
 !apps/sale/migrations/__init__.py
 
-apps/users/__pycache__/
 apps/users/migrations/*
 !apps/users/migrations/__init__.py
 

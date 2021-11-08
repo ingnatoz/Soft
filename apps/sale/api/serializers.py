@@ -1,5 +1,6 @@
 from rest_framework import serializers
 from apps.sale.models import Product, PaymentType, Restaurant, Customer, SaleOrder, SaleOrderProduct
+from apps.users.api.serializers import CustomUserSerializer
 
 
 class ProductSerializer(serializers.ModelSerializer):
@@ -26,13 +27,21 @@ class CustomerSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
-class SaleOrderSerializer(serializers.ModelSerializer):
+class SaleOrderProductSerializer(serializers.ModelSerializer):
+    product = ProductSerializer()
+
     class Meta:
-        model = SaleOrder
+        model = SaleOrderProduct
         fields = '__all__'
 
 
-class SaleOrderProductSerializer(serializers.ModelSerializer):
+class SaleOrderSerializer(serializers.ModelSerializer):
+    payment_type = PaymentTypeSerializer()
+    restaurant = RestaurantSerializer()
+    customer = CustomerSerializer()
+    user = CustomUserSerializer()
+    sale_order_products = SaleOrderProductSerializer(many=True, read_only=True)
+
     class Meta:
-        model = SaleOrderProduct
+        model = SaleOrder
         fields = '__all__'
